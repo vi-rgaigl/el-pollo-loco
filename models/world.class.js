@@ -54,7 +54,8 @@ class World {
         if(obj.otherDirection) {
             this.imageFlip(obj);
         } 
-        this.ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height);
+        obj.draw(this.ctx);
+        obj.drawRect(this.ctx);
         if(obj.otherDirection) {
             this.imageFlipBack(obj);
         }

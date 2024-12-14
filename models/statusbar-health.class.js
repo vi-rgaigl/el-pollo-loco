@@ -1,4 +1,4 @@
-class Statusbar extends DrawableObject {
+class StatusbarHealth extends DrawableObject {
 
     percentage = 100;
 

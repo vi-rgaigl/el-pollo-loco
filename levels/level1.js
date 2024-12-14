@@ -1,4 +1,26 @@
-const level1 = new Level(
+let level1 = new Level(
+[
+    new Coin(),
+    new Coin(),
+    new Coin(),
+    new Coin(),
+    new Coin(),
+    new Coin(),
+    new Coin(),
+    new Coin()
+],
+[
+    new Bottle(),
+    new Bottle(),
+    new Bottle(),
+    new Bottle(),
+    new Bottle(),
+    new Bottle(),
+    new Bottle(),
+    new Bottle(),
+    new Bottle(),
+    new Bottle()
+],
 [
     new Chicken(),
     new Chicken(),

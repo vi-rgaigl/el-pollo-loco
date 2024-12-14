@@ -5,12 +5,10 @@ class World {
     keyboard;
     camera_x = 0;
     
-    statusbar_health = new Statusbar();
+    statusbar_health = new StatusbarHealth();
     character = new Character();
     level = level1;
-    // enemies = level1.enemies;
-    // clouds = level1.clouds;
-    // backgroundObjects = level1.backgroundObjects;
+    throwableObjects = [new ThrowableObject()];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext("2d");
@@ -18,7 +16,7 @@ class World {
         this.keyboard = keyboard;
         this.setWorld();
         this.draw();
-        this.checkCollisions();
+        this.run();
         
     }
 
@@ -40,7 +38,10 @@ class World {
         this.ctx.translate(this.camera_x, 0);
         
         this.addToMap(this.character);
+        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
 
@@ -81,14 +82,27 @@ class World {
         this.ctx.restore();
     }
     
-    checkCollisions() {
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach(enemy => {
-                if (this.character.isColliding(enemy)) {
-                    this.character.hit();
-                    this.statusbar_health.setPercentage(this.character.energy);
-                }
-            });
+           this.checkCollision();
+           this.checkThrowObjects();
         }, 200);
+    }
+
+
+    checkCollision() {
+        this.level.enemies.forEach(enemy => {
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.statusbar_health.setPercentage(this.character.energy);
+            }
+        });
+    }
+
+    checkThrowObjects() {
+        if(this.keyboard.D) {
+            let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 50);
+            this.throwableObjects.push(bottle);
+        }
     }
 }

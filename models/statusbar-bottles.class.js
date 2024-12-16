@@ -23,30 +23,30 @@ class StatusbarBottles extends DrawableObject {
 
     setCount(count) {
         this.count = count;
-        this.img = this.getImageFromCount();
+        let path = this.IMAGES_STAT_BOTTLES[this.resolveImageIndex()];
+        this.img = this.imageCache[path];
     }
 
-    getImageFromCount() {
-        let path;
-        switch (true) {
-            case (this.count > 10):
-                path = this.IMAGES_STAT_BOTTLES[5];
-                break;
-            case (this.count > 8):
-                path = this.IMAGES_STAT_BOTTLES[4];
-                break;
-            case (this.count > 6):
-                path = this.IMAGES_STAT_BOTTLES[3];
-                break;
-            case (this.count > 4):
-                path = this.IMAGES_STAT_BOTTLES[2];
-                break;
-            case (this.count > 2):
-                path = this.IMAGES_STAT_BOTTLES[1];
-                break;
-            default:
-                path = this.IMAGES_STAT_BOTTLES[0];
+    resolveImageIndex() {
+        if (this.count >= 10) {
+            return 5;
+        } else if (this.count >= 8) {
+            return 4;
+        } else if (this.count >= 6) {
+            return 3;
+        } else if (this.count >= 3) {
+            return 2;
+        } else if (this.count >= 1) {
+            return 1;
+        } else {
+            return 0;
         }
-        return this.img = this.imageCache[path];
+    }
+
+    draw(ctx) {
+        super.draw(ctx);
+        ctx.font = '20px Arial';
+        ctx.fillStyle = 'white';
+        ctx.fillText(this.count, this.x + this.width , this.y + this.height / 2 + 17);
     }
 }

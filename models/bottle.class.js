@@ -1,5 +1,8 @@
 class Bottle extends DrawableObject {
 
+    collecting_sound = new Audio('./audio/bottle_blob.mp3');
+    throwing_sound = new Audio('./audio/throwing.mp3');
+
     IMAGES_BOTTLE = [
         './img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
         './img/6_salsa_bottle/2_salsa_bottle_on_ground.png',
@@ -15,4 +18,7 @@ class Bottle extends DrawableObject {
         this.width = 60;
     }
 
+    playSound(i) {
+        this.collecting_sound.play();
+    }
 }

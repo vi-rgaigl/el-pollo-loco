@@ -22,11 +22,13 @@ class ThrowableObject extends MovableObject {
         this.y = y;
         this.speedY = 8;      
         this.applyGravity();
-        // this.throwing_sound.play();
         setInterval(() => {
             this.x += 10;
             this.playAnimation(this.IMAGES_ROTATE);
-            
         }, 25);
+    }
+
+    playSound() {
+        this.throwing_sound.play();
     }
 }

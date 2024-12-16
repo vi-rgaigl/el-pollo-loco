@@ -106,21 +106,29 @@ class World {
         this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
                 this.level.coins.splice(index, 1);
+                coin.playSound();
                 this.statusbar_coins.setCount(this.statusbar_coins.count + 1);
+                if (this.statusbar_coins.count == 10) {
+                    this.statusbar_health.setPercentage(100);
+                    this.statusbar_coins.setCount(0);
+                }
             }
         });
         this.level.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
                 this.level.bottles.splice(index, 1);
+                bottle.playSound();
                 this.statusbar_bottles.setCount(this.statusbar_bottles.count + 1);
             }
         });
     }
 
     checkThrowObjects() {
-        if(this.keyboard.D) {
+        if(this.keyboard.D && this.statusbar_bottles.count > 0) {
             let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 50);
             this.throwableObjects.push(bottle);
+            this.statusbar_bottles.setCount(this.statusbar_bottles.count - 1);
+            bottle.playSound();             
         }
     }
 }

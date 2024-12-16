@@ -29,7 +29,7 @@ class StatusbarBottles extends DrawableObject {
     getImageFromCount() {
         let path;
         switch (true) {
-            case (this.count == 10):
+            case (this.count > 10):
                 path = this.IMAGES_STAT_BOTTLES[5];
                 break;
             case (this.count > 8):

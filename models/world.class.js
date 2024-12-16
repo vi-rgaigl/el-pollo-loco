@@ -27,6 +27,14 @@ class World {
         this.character.setWorld(this);
     }
 
+    run() {
+        setInterval(() => {
+           this.checkCollision();
+           this.checkThrowObjects();
+           this.checkCollisionFromAbove();
+        }, 200);
+    }
+
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -87,14 +95,6 @@ class World {
         obj.x = obj.x * -1;
         this.ctx.restore();
     }
-    
-    run() {
-        setInterval(() => {
-           this.checkCollision();
-           this.checkThrowObjects();
-        }, 200);
-    }
-
 
     checkCollision() {
         this.level.enemies.forEach(enemy => {
@@ -119,6 +119,18 @@ class World {
                 this.level.bottles.splice(index, 1);
                 bottle.playSound();
                 this.statusbar_bottles.setCount(this.statusbar_bottles.count + 1);
+            }
+        });
+    }
+
+    checkCollisionFromAbove() {
+        this.level.enemies.forEach((enemy, index) => {
+            if (this.character.isCollidingFromAbove(enemy) && enemy instanceof Chicken) {
+                enemy.chickenDead();
+                this.character.noHit();
+                setTimeout(() => {
+                    this.level.enemies.splice(index, 1);
+                }, 3000);       
             }
         });
     }

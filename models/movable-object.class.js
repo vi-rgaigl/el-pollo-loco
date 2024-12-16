@@ -45,19 +45,43 @@ class MovableObject extends DrawableObject {
 
     isColliding(obj) {
         return this.x + this.width > obj.x &&
-            this.y + this.height > obj.y &&
-            this.x < obj.x &&
-            this.y < obj.y;
+        this.y + this.height > obj.y &&
+        this.x < obj.x + obj.width &&
+        this.y < obj.y + obj.height;
+    }
+
+    isCollidingFromAbove(obj) {
+        if (!(obj instanceof Chicken)) {
+            return false;
+        }
+        let isCollidingAbove = this.y + this.height <= obj.y + obj.height / 2 &&
+                                 this.y + this.height > obj.y &&
+                                 this.x + this.width > obj.x &&
+                                 this.x < obj.x + obj.width;
+        if (isCollidingAbove) {
+            // console.log('colliding from above');
+        }
+        return isCollidingAbove;
     }
     
-    hit () {
-        this.energy -= 5;
+    hit() {
+        this.energy -= 2;
         if(this.energy <= 0) {
             this.energy = 0;
         } else {
             this.lastHit = new Date().getTime();
         }
     
+    }
+
+    noHit() {
+        this.energy += 5;
+        if(this.energy >= 100) {
+            this.energy = 100;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+        
     }
 
     isHurt() {

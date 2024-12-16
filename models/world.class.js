@@ -6,6 +6,9 @@ class World {
     camera_x = 0;
     
     statusbar_health = new StatusbarHealth();
+    statusbar_endboss = new StatusbarEndboss();
+    statusbar_bottles = new StatusbarBottles();
+    statusbar_coins = new StatusbarCoins();
     character = new Character();
     level = level1;
     throwableObjects = [new ThrowableObject()];
@@ -35,6 +38,9 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
         //fixed objects
         this.addToMap(this.statusbar_health);
+        this.addToMap(this.statusbar_coins);
+        this.addToMap(this.statusbar_bottles);
+        this.addToMap(this.statusbar_endboss);
         this.ctx.translate(this.camera_x, 0);
         
         this.addToMap(this.character);
@@ -95,6 +101,18 @@ class World {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.statusbar_health.setPercentage(this.character.energy);
+            }
+        });
+        this.level.coins.forEach((coin, index) => {
+            if (this.character.isColliding(coin)) {
+                this.level.coins.splice(index, 1);
+                this.statusbar_coins.setCount(this.statusbar_coins.count + 1);
+            }
+        });
+        this.level.bottles.forEach((bottle, index) => {
+            if (this.character.isColliding(bottle)) {
+                this.level.bottles.splice(index, 1);
+                this.statusbar_bottles.setCount(this.statusbar_bottles.count + 1);
             }
         });
     }

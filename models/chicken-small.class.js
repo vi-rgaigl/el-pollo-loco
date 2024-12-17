@@ -7,6 +7,7 @@ class ChickenSmall extends MovableObject {
     height = 55;
     width = 55;
     speedY = 10;
+    isDead = false;
     offset = {
         top: 2,
         bottom: 2,
@@ -62,6 +63,7 @@ class ChickenSmall extends MovableObject {
      * clearing movement and animation intervals, and playing the dead animation.
     */
     chickenDead() {
+        this.isDead = true;
         this.sound_small_chicken_hit.play();
         clearInterval(this.moveInterval);
         clearInterval(this.animationInterval);

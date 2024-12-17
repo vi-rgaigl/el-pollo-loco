@@ -13,7 +13,6 @@ class Bottle extends DrawableObject {
     isExploded = false;
 
     collecting_sound = new Audio('./audio/bottle_blob.mp3');
-    throwing_sound = new Audio('./audio/throwing.mp3');
     
 
     IMAGES_BOTTLE = [
@@ -27,9 +26,7 @@ class Bottle extends DrawableObject {
     constructor() {
         super().loadImages(this.IMAGES_BOTTLE);
         this.loadImage(this.IMAGES_BOTTLE[Math.floor(Math.random()*2)]);
-        sounds.push(this.collecting_sound);
-        sounds.push(this.throwing_sound);
-        
+        sounds.push(this.collecting_sound);  
         this.x = -600 + Math.random() *2700;
         this.y = 370;
         this.height = 60;
@@ -39,8 +36,7 @@ class Bottle extends DrawableObject {
     /**
      * Plays the collecting sound.
      */
-    playSound() {
+    playCollectSound() {
         this.collecting_sound.play();
     }
-
 }

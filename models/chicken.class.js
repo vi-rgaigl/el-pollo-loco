@@ -7,7 +7,7 @@ class Chicken extends MovableObject {
     height = 60;
     width = 60;
     y = 370;
-    isDead;
+    isDead = false;
     sound_chicken_hit = new Audio('./audio/hit-chicken.mp3');
 
     CHICKEN_WALKING = [
@@ -52,6 +52,7 @@ class Chicken extends MovableObject {
      * clearing movement and animation intervals, and playing the dead animation.
     */
     chickenDead() {
+        this.isDead = true;
         this.sound_chicken_hit.play();
         clearInterval(this.moveInterval);
         clearInterval(this.animationInterval);

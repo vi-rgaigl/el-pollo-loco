@@ -16,6 +16,8 @@ class World {
     endboss = new Endboss();
     level = level1;
     throwableObjects = [new ThrowableObject()];
+    break_sound = new Audio('./audio/break-bottle.mp3');
+    throwing_sound = new Audio('./audio/throwing.mp3');
 
     /**
      * Creates an instance of World.
@@ -28,6 +30,8 @@ class World {
         this.keyboard = keyboard;
         this.setWorld();
         this.draw();
+        sounds.push(this.throwing_sound);
+        sounds.push(this.break_sound);   
         this.run();
         
     }
@@ -47,7 +51,7 @@ class World {
            this.checkCollisions();
            this.checkThrowObjects();
            this.checkCollisionThrowableObj()
-        }, 200);
+        }, 1000 / 20);
     }
 
     /**
@@ -80,7 +84,7 @@ class World {
                 if (bottle.isColliding(enemy) && !bottle.isExploded) {
                     bottle.isExploded = true;
                     bottle.animateSplash();
-                    bottle.breakSound();
+                    this.break_sound.play();
                     setTimeout(() => {
                         this.throwableObjects.splice(bottle, 1);
                     }, 80);
@@ -101,7 +105,7 @@ class World {
             if (bottle.isColliding(this.endboss) && !bottle.isExploded) {
                 bottle.isExploded = true;
                 bottle.animateSplash(bottle);
-                bottle.breakSound();
+                this.break_sound.play();
                 this.endboss.hitBoss();
                 this.statusbar_endboss.setPercentage(this.endboss.energy);
                 setTimeout(() => {
@@ -118,9 +122,9 @@ class World {
      */
     checkBottleCollideWithGround() {
         this.throwableObjects.forEach(bottle => {
-            if (bottle.y > 274) {
+            if (bottle.y > 300) {
                 bottle.animateSplash();
-                bottle.breakSound();
+                this.break_sound.play();
                 setTimeout(() => {
                     this.throwableObjects.splice(bottle, 1);
                 }, 500);
@@ -142,7 +146,7 @@ class World {
                     this.deleteEnemy(enemy);
                     this.character.jump();
                 }
-                else {
+                else if (!enemy.isDead) {
                     this.character.hit();
                     this.statusbar_health.setPercentage(this.character.energy);
                 }
@@ -199,7 +203,7 @@ class World {
         this.level.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
                 this.level.bottles.splice(index, 1);
-                bottle.playSound();
+                bottle.playCollectSound();
                 this.statusbar_bottles.setCount(this.statusbar_bottles.count + 1);
             }
         });
@@ -210,10 +214,10 @@ class World {
      */
     checkThrowObjects() {
         if(this.keyboard.D && this.statusbar_bottles.count > 0) {
-            let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 50);
+            let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 60);
             this.throwableObjects.push(bottle);
             this.statusbar_bottles.setCount(this.statusbar_bottles.count - 1);
-            bottle.playSound();             
+            this.throwing_sound.play();            
         }
     }
 

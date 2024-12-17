@@ -6,8 +6,7 @@ class ThrowableObject extends MovableObject {
 
     throwBottle;
 
-    throwing_sound = new Audio('./audio/throwing.mp3');
-    break_sound = new Audio('./audio/break-bottle.mp3');
+
 
     IMAGES_ROTATE = [
         './img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
@@ -34,8 +33,7 @@ class ThrowableObject extends MovableObject {
         super().loadImages(this.IMAGES_ROTATE);
         this.loadImages(this.IMAGES_SPLASH);
         this.loadImage(this.IMAGES_ROTATE[0]);
-        sounds.push(this.throwing_sound);
-        sounds.push(this.break_sound);
+   
         this.height = 60;
         this.width = 60;
         this.throw(x,y);
@@ -66,17 +64,18 @@ class ThrowableObject extends MovableObject {
         this.playAnimation(this.IMAGES_SPLASH);
     }
 
-    /**
-     * Plays the throwing sound.
-     */
-    playSound() {
-        this.throwing_sound.play();
-    }
     
-    /**
-     * Plays the breaking sound.
-     */
-    breakSound() {
-        this.break_sound.play();
-    }
+    // /**
+    //  * Plays the throwing sound.
+    //  */
+    // playThrowSound() {
+    //     this.throwing_sound.play();
+    // }
+    
+    // /**
+    //  * Plays the break sound
+    //  */
+    // playBreakSound() {
+    //     this.break_sound.play();
+    // }
 }

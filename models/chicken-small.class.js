@@ -1,3 +1,7 @@
+/**
+ * Class representing a small chicken.
+ * @extends MovableObject
+ */
 class ChickenSmall extends MovableObject {
     y = 380;
     height = 55;
@@ -20,6 +24,9 @@ class ChickenSmall extends MovableObject {
 
     sound_small_chicken_hit = new Audio('./audio/small-chicken.mp3');
 
+    /**
+     * Creates a small chicken.
+     */
     constructor() {
         super().loadImage('./img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -30,10 +37,16 @@ class ChickenSmall extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Animates the small chicken.
+     */
     animate() {
         this.moveChicken();
     }
 
+    /**
+     * Moves the small chicken.
+     */
     moveChicken() {
         this.moveInterval = setInterval(() => {
             this.moveLeft();
@@ -44,6 +57,10 @@ class ChickenSmall extends MovableObject {
         }, 150);
     }
 
+    /**
+    * Handles the death of the chicken by playing the hit sound, 
+     * clearing movement and animation intervals, and playing the dead animation.
+    */
     chickenDead() {
         this.sound_small_chicken_hit.play();
         clearInterval(this.moveInterval);

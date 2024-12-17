@@ -1,5 +1,8 @@
 let level1;
 
+/**
+ * Initializes level 1 by creating a new Level instance with coins, bottles, enemys and background.
+ */
 function initLevel() {
 level1 = new Level(
 [

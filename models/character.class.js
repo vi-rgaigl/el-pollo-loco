@@ -1,3 +1,7 @@
+/**
+ * Class representing the main character.
+ * @extends MovableObject
+ */
 class Character extends MovableObject {
     height = 250;
     width =  120;
@@ -78,7 +82,9 @@ class Character extends MovableObject {
     jump_sound = new Audio('./audio/jump.mp3');
     hurt_sound = new Audio('./audio/hurt.mp3');
 
-
+    /**
+     * Creates an instance of Character.
+     */
     constructor() {
         super().loadImage('./img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_IDLE);
@@ -95,16 +101,26 @@ class Character extends MovableObject {
         this.applyGravity();
     }
 
+    /**
+     * Sets the world for the character and starts the animation.
+     * @param {Object} world - The world object.
+     */
     setWorld(world) {
         this.world = world;
         this.animate();
     }
 
+    /**
+     * Animates the character by moving and updating its animation frames.
+     */
     animate() {
         this.moveCharacter();
         this.animateCharakter();
     }
 
+    /**
+     * Moves the character based on keyboard input.
+     */
     moveCharacter() {
         setInterval(() => {
             this.walk_sound.pause();
@@ -126,6 +142,9 @@ class Character extends MovableObject {
         }, 1000 / 60);
     }
 
+    /**
+     * Updates the character's animation frames based on its state.
+     */    
     animateCharakter() {
         setInterval(() => {
             if (this.isHurt()) {
@@ -149,11 +168,18 @@ class Character extends MovableObject {
         }, 100);
     }
     
+    /**
+     * Updates the time of the last move.
+     */
     updateMoveTime() {
         let currentTime = new Date().getTime();
         this.lastMoveTime = currentTime;
     }
 
+    /**
+     * Checks if the character is hurt.
+     * @returns {boolean} True if the character is hurt, false otherwise.
+     */
     sleepTime() {
         let passedTime = new Date().getTime() - this.lastMoveTime;
         return passedTime > 8000;

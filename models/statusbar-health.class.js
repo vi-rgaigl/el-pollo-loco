@@ -1,3 +1,7 @@
+/**
+ * Class representing the status bar for health of the character.
+ * @extends DrawableObject
+ */
 class StatusbarHealth extends DrawableObject {
 
     percentage = 100;
@@ -11,6 +15,9 @@ class StatusbarHealth extends DrawableObject {
         './img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png'
     ];
 
+    /**
+     * Creates an instance of StatusbarHealth.
+     */
     constructor() {
         super().loadImages(this.IMAGES_STAT_HEALTH);
         this.loadImage(this.IMAGES_STAT_HEALTH[5]);
@@ -21,12 +28,20 @@ class StatusbarHealth extends DrawableObject {
         this.setPercentage(this.percentage);
     }
 
+    /**
+     * Sets the percantage of health and updates the status bar image.
+     * @param {number} count - The percantage of Character.
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES_STAT_HEALTH[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
+    /**
+     * Resolves the image index based on the percentage of character.
+     * @returns {number} The index of the image to display.
+     */
     resolveImageIndex() {
         if (this.percentage >= 100) {
             return 5;
@@ -43,10 +58,14 @@ class StatusbarHealth extends DrawableObject {
         }
     }
 
+    /**
+     * Draws the status bar and the count of bottles on the canvas.
+     * @param {CanvasRenderingContext2D} ctx - The rendering context of the canvas.
+     */
     draw(ctx) {
         super.draw(ctx);
-        ctx.font = '20px Arial';
+        ctx.font = '20px zabras';
         ctx.fillStyle = 'white';
-        ctx.fillText(this.percentage, this.x + this.width , this.y + this.height / 2 + 17);
+        ctx.fillText(this.percentage, this.x + this.width + 3, this.y + this.height / 2 + 17);
     }
 }

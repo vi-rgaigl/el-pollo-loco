@@ -1,3 +1,7 @@
+/**
+ * Class representing the status bar for coins.
+ * @extends DrawableObject
+ */
 class StatusbarCoins extends DrawableObject {
 
     count = 0;
@@ -11,6 +15,9 @@ class StatusbarCoins extends DrawableObject {
         './img/7_statusbars/1_statusbar/1_statusbar_coin/green/100.png'
     ];
 
+    /**
+     * Creates an instance of StatusbarCoins.
+     */
     constructor() {
         super().loadImages(this.IMAGES_STAT_COINS);
         this.loadImage(this.IMAGES_STAT_COINS[0]);
@@ -21,12 +28,20 @@ class StatusbarCoins extends DrawableObject {
         this.setCount(this.count);
     }
 
+    /**
+     * Sets the count of coins and updates the status bar image.
+     * @param {number} count - The count of coins.
+     */
     setCount(count) {
         this.count = count;
         let path = this.IMAGES_STAT_COINS[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
+    /**
+     * Resolves the image index based on the count of coins.
+     * @returns {number} The index of the image to display.
+     */
     resolveImageIndex() {
         if (this.count >= 10) {
             return 5;
@@ -43,10 +58,14 @@ class StatusbarCoins extends DrawableObject {
         }
     }
 
+    /**
+     * Draws the status bar and the count of bottles on the canvas.
+     * @param {CanvasRenderingContext2D} ctx - The rendering context of the canvas.
+     */
     draw(ctx) {
         super.draw(ctx);
-        ctx.font = '20px Arial';
+        ctx.font = '20px zabras';
         ctx.fillStyle = 'white';
-        ctx.fillText(this.count, this.x + this.width , this.y + this.height / 2 + 17);
+        ctx.fillText(this.count, this.x + this.width + 3, this.y + this.height / 2 + 17);
     }
 }

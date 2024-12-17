@@ -1,3 +1,7 @@
+/**
+ * Class Chicken representing a chicken object.
+ * @extends MovableObject
+ */
 class Chicken extends MovableObject {
 
     height = 60;
@@ -17,6 +21,9 @@ class Chicken extends MovableObject {
         './img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
     ];
 
+    /**
+     * Creates a chicken object.
+     */
     constructor() {
         super().loadImage(this.CHICKEN_WALKING[0]);
         this.loadImages(this.CHICKEN_WALKING);
@@ -28,6 +35,9 @@ class Chicken extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Moves the chicken to the left.
+     */
     animate() {     
         this.moveInterval = setInterval(() => {
             this.moveLeft();
@@ -37,6 +47,10 @@ class Chicken extends MovableObject {
         }, 180);
     }
 
+    /**
+    * Handles the death of the chicken by playing the hit sound, 
+     * clearing movement and animation intervals, and playing the dead animation.
+    */
     chickenDead() {
         this.sound_chicken_hit.play();
         clearInterval(this.moveInterval);

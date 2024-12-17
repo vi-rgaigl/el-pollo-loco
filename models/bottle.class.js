@@ -1,3 +1,7 @@
+/**
+ * Class representing a bottle object.
+ * @extends DrawableObject
+ */
 class Bottle extends DrawableObject {
 
     offset = {
@@ -17,6 +21,9 @@ class Bottle extends DrawableObject {
         './img/6_salsa_bottle/2_salsa_bottle_on_ground.png',
     ];
 
+    /**
+     * Creates a bottle object.
+     */
     constructor() {
         super().loadImages(this.IMAGES_BOTTLE);
         this.loadImage(this.IMAGES_BOTTLE[Math.floor(Math.random()*2)]);
@@ -29,6 +36,9 @@ class Bottle extends DrawableObject {
         this.width = 60;
     }
 
+    /**
+     * Plays the collecting sound.
+     */
     playSound() {
         this.collecting_sound.play();
     }

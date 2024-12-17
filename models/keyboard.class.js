@@ -1,3 +1,6 @@
+/**
+ * Class representing the keyboard input.
+ */
 class Keyboard {
 
     LEFT = false;
@@ -7,21 +10,33 @@ class Keyboard {
     SPACE = false;
     D = false;
 
+    /**
+     * Creates an instance of Keyboard and binds key and touch events.
+     */
     constructor() {
         this.bindKeyEvents();
         this.bindTouchEvents();
     }
 
+    /**
+     * Binds key events for starting and ending key presses.
+     */
     bindKeyEvents() {
         this.bindKeyStart();
         this.bindKeyEnd();
     }
 
+    /**
+     * Binds touch events for starting and ending touch inputs.
+     */
     bindTouchEvents() {
         this.bindTouchStart();
         this.bindTouchEnd();
     }
 
+    /**
+     * Binds the start of key presses to update the keyboard state.
+     */
     bindKeyStart() {
         window.addEventListener('keydown', (event) => {
             switch (event.keyCode) {
@@ -47,6 +62,9 @@ class Keyboard {
         });
     }
 
+    /**
+     * Binds the end of key presses to update the keyboard state.
+     */
     bindKeyEnd() {
         window.addEventListener('keyup', (event) => {
             switch (event.keyCode) {
@@ -72,6 +90,9 @@ class Keyboard {
         });
     }
 
+    /**
+     * Binds the start of touch inputs to update the keyboard state.
+     */
     bindTouchStart() {
         window.addEventListener("touchstart", (event) => {
             if (event.target.id == "btnRight") {
@@ -89,6 +110,9 @@ class Keyboard {
         });
     }
 
+    /**
+     * Binds the end of touch inputs to update the keyboard state.
+     */
     bindTouchEnd() {
         window.addEventListener("touchend", (event) => {
             if (event.target.id == "btnRight") {

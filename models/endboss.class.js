@@ -1,3 +1,7 @@
+/**
+ * Class reprents a Endboss object.
+ * @extends MovableObject
+ */
 class Endboss extends MovableObject {
 
     height = 340;
@@ -55,6 +59,9 @@ class Endboss extends MovableObject {
     bossAppear_sound = new Audio('./audio/high-noon.mp3');
     win_sound = new Audio('./audio/mexico.mp3');
 
+    /**
+     * Creates a Endboss object.
+    */
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
         this.loadImages(this.IMAGES_ALERT);
@@ -67,6 +74,9 @@ class Endboss extends MovableObject {
         this.animateEndboss();
     }
 
+    /**
+     * Animates the endboss by moving and updating its animation frames.
+     */
     animateEndboss() {
         setInterval(() => {
             if (this.isHurt() && !this.isDead()) {
@@ -87,6 +97,9 @@ class Endboss extends MovableObject {
         }, 200);
     }
      
+    /**
+     * Moves the endboss.
+     */
     bossAppears() {
         this.bossAppear_sound.play();
         this.playAnimation(this.IMAGES_WALK);

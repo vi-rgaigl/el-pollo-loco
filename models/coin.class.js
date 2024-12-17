@@ -1,3 +1,7 @@
+/**
+ * Class representing a coin object.
+ * @extends DrawableObject
+ */
 class Coin extends DrawableObject {
 
     offset = {
@@ -14,6 +18,9 @@ class Coin extends DrawableObject {
         './img/8_coin/coin_2.png',
     ];
 
+    /**
+     * Creates a coin object.
+     */
     constructor() {
         super().loadImages(this.IMAGES_ROTATE);
         this.loadImage(this.IMAGES_ROTATE[Math.floor(Math.random()*2)]);
@@ -24,6 +31,9 @@ class Coin extends DrawableObject {
         this.width = 70;
     }
 
+    /**
+     * Plays the collecting sound.
+     */
     playSound() {
         this.collecting_sound.play();
     }

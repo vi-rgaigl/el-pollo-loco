@@ -72,7 +72,7 @@ class World {
                 bottle.isExploded = true;
                 bottle.animateSplash(bottle);
                 bottle.breakSound();
-                this.endboss.hit();
+                this.endboss.hitBoss();
                 this.statusbar_endboss.setPercentage(this.endboss.energy);
                 setTimeout(() => {
                     this.throwableObjects.splice(bottle, 1);
@@ -202,7 +202,7 @@ class World {
 
 
     addBossHealthBar() {
-        if (this.character.x >= 2000) {
+        if (this.character.x >= 1900) {
             this.endboss.firstContact = true;
         }
         if (this.endboss.firstContact == true) {

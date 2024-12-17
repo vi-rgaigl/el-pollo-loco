@@ -4,7 +4,7 @@ class Endboss extends MovableObject {
     width = 280;
     y = 120;
     x = 2200;
-    speed = 20;
+    speed = 15;
     health = 100;
     firstContact = false;
     offset = {
@@ -53,6 +53,7 @@ class Endboss extends MovableObject {
     ];  
 
     bossAppear_sound = new Audio('./audio/high-noon.mp3');
+    win_sound = new Audio('./audio/mexico.mp3');
 
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
@@ -62,6 +63,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         sounds.push(this.bossAppear_sound);
+        sounds.push(this.win_sound);
         this.animateEndboss();
     }
 
@@ -72,9 +74,11 @@ class Endboss extends MovableObject {
             } else if (this.isDead()) {
                 this.speed = 0;
                 this.playAnimation(this.IMAGES_DEAD);
+                this.bossAppear_sound.pause();
+                this.win_sound.play();
                 setTimeout(() => {
                     winGame();
-                }, 2000);                
+                }, 1000);                
             } else if (this.firstContact) {
                 this.bossAppears();
             } else {
@@ -89,6 +93,6 @@ class Endboss extends MovableObject {
         this.moveLeft();
         setTimeout(() => {
             this.bossAppear_sound.pause();
-        }, 5000);
+        }, 3000);
     }
 }

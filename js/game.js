@@ -4,7 +4,6 @@ let keyboard = new Keyboard();
 let sounds = [];
 let isMuted = false;
 background_sound = new Audio('./audio/game.mp3');
-win_sound = new Audio('./audio/mexico.mp3');
 lose_sound = new Audio('./audio/game-over.mp3');
 background_sound.loop = true;
 background_sound.volume = 0.1;
@@ -23,7 +22,6 @@ function startGame() {
     checkMobileDevice();
     this.background_sound.play();
     sounds.push(background_sound);
-    sounds.push(win_sound);
     sounds.push(lose_sound);
 }
 
@@ -51,7 +49,6 @@ function winGame() {
     document.getElementById('winScreen').classList.remove('d-none');
     for (let i = 1; i < 99999; i++) window.clearInterval(i);
     this.background_sound.pause();
-    this.win_sound.play();
 }
 
 function backToMenu() {

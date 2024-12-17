@@ -64,8 +64,14 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
-        if (this instanceof Endboss) {
-            this.energy -= 20;
+    }
+
+    hitBoss() {
+        this.energy -= 20;
+        if(this.energy <= 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
         }
     }
 

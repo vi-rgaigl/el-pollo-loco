@@ -16,6 +16,7 @@ class World {
     endboss = new Endboss();
     level = level1;
     throwableObjects = [new ThrowableObject()];
+    lastThrowTime = 0;
     break_sound = new Audio('./audio/break-bottle.mp3');
     throwing_sound = new Audio('./audio/throwing.mp3');
 
@@ -213,14 +214,32 @@ class World {
      * Checks if throwable objects are thrown.
      */
     checkThrowObjects() {
-        if(this.keyboard.D && this.statusbar_bottles.value > 0) {
-            let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 60);
-            this.throwableObjects.push(bottle);
-            this.statusbar_bottles.setValue(this.statusbar_bottles.value - 1);
-            this.throwing_sound.play();            
+        let currentTime = new Date().getTime();
+        if (this.canThrowObject(currentTime)) {
+            this.throwObject();
+            this.lastThrowTime = currentTime;
         }
     }
 
+    /**
+     * Determines if an object can be thrown.
+     * @param {number} currentTime - The current time in milliseconds.
+     * @returns {boolean} True if an object can be thrown, false otherwise.
+     */
+    canThrowObject(currentTime) {
+        return this.keyboard.D && this.statusbar_bottles.value > 0 && (currentTime - this.lastThrowTime) > 500;
+    }
+
+    /**
+     * Handles the logic for throwing an object.
+     */
+    throwObject() {
+        let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 60);
+        this.throwableObjects.push(bottle);
+        this.statusbar_bottles.setValue(this.statusbar_bottles.value - 1);
+        this.throwing_sound.play();
+    }
+    
     /**
      * Draws the game world by adding all objects to the map.
      * The camera follows the character.

@@ -1,4 +1,7 @@
-let level1 = new Level(
+let level1;
+
+function initLevel() {
+level1 = new Level(
 [
     new Coin(),
     new Coin(),
@@ -79,4 +82,4 @@ let level1 = new Level(
     new BackgroundObject('./img/5_background/layers/1_first_layer/2.png', 720*3-3, 0, 480, 720)
 ]
 );
-
+}

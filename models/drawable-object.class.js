@@ -29,7 +29,7 @@ class DrawableObject {
         }
     }
 
-    drawRect(ctx) { //|| this instanceof ChickenSmall
+    drawFrame(ctx) { //|| this instanceof ChickenSmall
         if (this instanceof Character || this instanceof Chicken 
             || this instanceof Endboss || this instanceof Bottle
             || this instanceof Coin) {

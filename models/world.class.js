@@ -223,7 +223,7 @@ class World {
             this.imageFlip(obj);
         } 
         obj.draw(this.ctx);
-        obj.drawRect(this.ctx);
+        // obj.drawFrame(this.ctx);
         if(obj.otherDirection) {
             this.imageFlipBack(obj);
         }

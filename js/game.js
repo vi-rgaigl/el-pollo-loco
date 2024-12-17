@@ -20,6 +20,7 @@ function startGame() {
     initGame();
     checkIsMuted();
     checkMobileDevice();
+    this.soundPause();
     this.background_sound.play();
     sounds.push(background_sound);
     sounds.push(lose_sound);
@@ -100,6 +101,12 @@ function soundOn() {
     sounds.forEach(sound => {
         sound.muted = false;
     })
+}
+
+function soundPause() {
+    sounds.forEach(sound => {
+        sound.pause();
+    });
 }
 
 window.addEventListener('resize', checkMobileDevice)

@@ -96,18 +96,22 @@ class Keyboard {
     bindTouchStart() {
         window.addEventListener("touchstart", (event) => {
             if (event.target.id == "btnRight") {
+                event.preventDefault();
                 keyboard.RIGHT = true;
             }
             if (event.target.id == "btnLeft") {
+                event.preventDefault();
                 keyboard.LEFT = true;
             }
             if (event.target.id == "btnJump") {
+                event.preventDefault();
                 keyboard.SPACE = true;
             }
             if (event.target.id == "btnThrow") {
+                event.preventDefault();
                 keyboard.D = true;
             }
-        });
+        }, { passive: false });
     }
 
     /**
@@ -116,17 +120,21 @@ class Keyboard {
     bindTouchEnd() {
         window.addEventListener("touchend", (event) => {
             if (event.target.id == "btnRight") {
+                event.preventDefault();
                 keyboard.RIGHT = false;
             }
             if (event.target.id == "btnLeft") {
+                event.preventDefault();
                 keyboard.LEFT = false;
             }
             if (event.target.id == "btnJump") {
+                event.preventDefault();
                 keyboard.SPACE = false;
             }
             if (event.target.id == "btnThrow") {
+                event.preventDefault();
                 keyboard.D = false;
             }
-        });
+        }, { passive: false });
     }
 }

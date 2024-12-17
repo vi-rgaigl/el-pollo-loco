@@ -1,6 +1,13 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let sounds = [];
+let isMuted = false;
+// background_sound = new Audio('audio/background.mp3');
+// win_sound = new Audio('audio/win.mp3');
+// lose_sound = new Audio('audio/lose.mp3');
+// background_sound.loop = true;
+// background_sound.volume = 0.1;
 
 function init() { 
     canvas = document.getElementById('canvas');

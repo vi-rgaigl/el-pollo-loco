@@ -1,7 +1,16 @@
 class Bottle extends DrawableObject {
 
+    offset = {
+        top: 10,
+        bottom: 10,
+        left: 15,
+        right: 10,
+    };
+    isExploded = false;
+
     collecting_sound = new Audio('./audio/bottle_blob.mp3');
     throwing_sound = new Audio('./audio/throwing.mp3');
+    
 
     IMAGES_BOTTLE = [
         './img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
@@ -11,6 +20,8 @@ class Bottle extends DrawableObject {
     constructor() {
         super().loadImages(this.IMAGES_BOTTLE);
         this.loadImage(this.IMAGES_BOTTLE[Math.floor(Math.random()*2)]);
+        sounds.push(this.collecting_sound);
+        sounds.push(this.throwing_sound);
         
         this.x = -600 + Math.random() *2700;
         this.y = 370;
@@ -18,7 +29,8 @@ class Bottle extends DrawableObject {
         this.width = 60;
     }
 
-    playSound(i) {
+    playSound() {
         this.collecting_sound.play();
     }
+
 }

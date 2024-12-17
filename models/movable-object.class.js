@@ -7,6 +7,13 @@ class MovableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
 
+    offset = {
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+    };
+
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
@@ -18,7 +25,7 @@ class MovableObject extends DrawableObject {
         this.x += this.speed;         
     }
 
-    moveLeft(bool) {
+    moveLeft() {
         this.x -= this.speed;
     }
 
@@ -49,20 +56,6 @@ class MovableObject extends DrawableObject {
         this.x < obj.x + obj.width &&
         this.y < obj.y + obj.height;
     }
-
-    isCollidingFromAbove(obj) {
-        if (!(obj instanceof Chicken)) {
-            return false;
-        }
-        let isCollidingAbove = this.y + this.height <= obj.y + obj.height / 2 &&
-                                 this.y + this.height > obj.y &&
-                                 this.x + this.width > obj.x &&
-                                 this.x < obj.x + obj.width;
-        if (isCollidingAbove) {
-            // console.log('colliding from above');
-        }
-        return isCollidingAbove;
-    }
     
     hit() {
         this.energy -= 2;
@@ -71,29 +64,29 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
-    
-    }
-
-    noHit() {
-        this.energy += 5;
-        if(this.energy >= 100) {
-            this.energy = 100;
-        } else {
-            this.lastHit = new Date().getTime();
-        }  
-    }
-
-    isHurt() {
-        let timePassed = new Date().getTime() - this.lastHit; //Differenz in ms
-        timePassed = timePassed / 1000; //umrechnen in Sekunden
-        if(timePassed < 1) {
-            return true;
-        } else {
-            return false;
+        if (this instanceof Endboss) {
+            this.energy -= 20;
         }
     }
 
+    recoverEnergy() {
+        let energyRegen = 20;
+        let newEnergy = this.energy + energyRegen;
+        if(newEnergy >= 100) {
+            this.energy = 100;
+        } else {
+            this.energy += 20;
+        }
+  
+    }
+
+    isHurt() {
+        let timePassed = new Date().getTime() - this.lastHit;
+        timePassed = timePassed / 1000;
+        return timePassed < 1;
+    }
+
     isDead() {
-        return this.energy === 0;
+        return this.energy == 0;
     }
 }

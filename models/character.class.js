@@ -89,7 +89,7 @@ class Character extends MovableObject {
         sounds.push(this.walk_sound);
         sounds.push(this.jump_sound);
         sounds.push(this.hurt_sound);
-        this.walk_sound.playbackRate = 1.7; // Set the playback rate to 1.5x speed
+        this.walk_sound.playbackRate = 1.7;
         this.walk_sound.volume = 0.5;
         this.applyGravity();
     }

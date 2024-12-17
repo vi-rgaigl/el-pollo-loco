@@ -97,7 +97,6 @@ class World {
     collisionChicken() {
         this.level.enemies.forEach(enemy => {
             if (this.character.isColliding(enemy)) {
-                //console.log('y', enemy.y)
                 if (this.character.isAboveGround() && this.character.speedY <= 0) {
                     enemy.chickenDead();
                     this.deleteEnemy(enemy);

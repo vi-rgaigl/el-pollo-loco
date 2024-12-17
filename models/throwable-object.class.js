@@ -6,8 +6,6 @@ class ThrowableObject extends MovableObject {
 
     throwBottle;
 
-
-
     IMAGES_ROTATE = [
         './img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
         './img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
@@ -63,19 +61,4 @@ class ThrowableObject extends MovableObject {
         clearInterval(this.throwBottle);
         this.playAnimation(this.IMAGES_SPLASH);
     }
-
-    
-    // /**
-    //  * Plays the throwing sound.
-    //  */
-    // playThrowSound() {
-    //     this.throwing_sound.play();
-    // }
-    
-    // /**
-    //  * Plays the break sound
-    //  */
-    // playBreakSound() {
-    //     this.break_sound.play();
-    // }
 }

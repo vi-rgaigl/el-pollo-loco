@@ -107,7 +107,7 @@ class World {
                 bottle.animateSplash(bottle);
                 this.break_sound.play();
                 this.endboss.hitBoss();
-                this.statusbar_endboss.setPercentage(this.endboss.energy);
+                this.statusbar_endboss.setValue(this.endboss.energy);
                 setTimeout(() => {
                     this.throwableObjects.splice(bottle, 1);
                 }, 80);
@@ -148,7 +148,7 @@ class World {
                 }
                 else if (!enemy.isDead) {
                     this.character.hit();
-                    this.statusbar_health.setPercentage(this.character.energy);
+                    this.statusbar_health.setValue(this.character.energy);
                 }
             }
         });
@@ -161,7 +161,7 @@ class World {
     collisionEndboss() {
         if (this.character.isColliding(this.endboss)) {
             this.character.hit();
-            this.statusbar_health.setPercentage(this.character.energy);
+            this.statusbar_health.setValue(this.character.energy);
         }
     }
 
@@ -186,10 +186,10 @@ class World {
             if (this.character.isColliding(coin)) {
                 this.level.coins.splice(index, 1);
                 coin.playSound();
-                this.statusbar_coins.setCount(this.statusbar_coins.count + 1);
+                this.statusbar_coins.setValue(this.statusbar_coins.value + 1);
                 if (this.statusbar_coins.count == 10) {
-                    this.statusbar_health.setPercentage(100);
-                    this.statusbar_coins.setCount(0);
+                    this.statusbar_health.setValue(100);
+                    this.statusbar_coins.setValue(0);
                 }
             }
         });
@@ -204,7 +204,7 @@ class World {
             if (this.character.isColliding(bottle)) {
                 this.level.bottles.splice(index, 1);
                 bottle.playCollectSound();
-                this.statusbar_bottles.setCount(this.statusbar_bottles.count + 1);
+                this.statusbar_bottles.setValue(this.statusbar_bottles.value + 1);
             }
         });
     }
@@ -213,10 +213,10 @@ class World {
      * Checks if throwable objects are thrown.
      */
     checkThrowObjects() {
-        if(this.keyboard.D && this.statusbar_bottles.count > 0) {
+        if(this.keyboard.D && this.statusbar_bottles.value > 0) {
             let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 60);
             this.throwableObjects.push(bottle);
-            this.statusbar_bottles.setCount(this.statusbar_bottles.count - 1);
+            this.statusbar_bottles.setValue(this.statusbar_bottles.value - 1);
             this.throwing_sound.play();            
         }
     }
